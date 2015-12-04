@@ -73,7 +73,7 @@ Timetable.Renderer = function(tt) {
 
             return this;
         },
-        addEvent: function(name, location, start, end, url, color) {
+        addEvent: function(name, location, start, end, url, color, course, lec, lab, room) {
             if (!locationExistsIn(location, this.locations)) {
                 throw new Error('Unknown location');
             }
@@ -87,7 +87,11 @@ Timetable.Renderer = function(tt) {
                 startDate: start,
                 endDate: end,
                 url: url,
-                color: color
+                color: color,
+                course: course,
+                lec: lec,
+                lab: lab,
+                room: room
             });
 
             return this;
@@ -186,7 +190,17 @@ Timetable.Renderer = function(tt) {
                 aNode.style.left = computeEventBlockOffset(event);
                 if( event.color )
                     aNode.style.backgroundColor = event.color;
-                smallNode.textContent = event.name;
+
+                var title = document.createElement('p');
+                title.textContent = event.name;
+                var course = document.createElement('p');
+                course.textContent = event.course+"("+event.lec+"-"+event.lab+")";
+                var room = document.createElement('p');
+                room.textContent = event.room;
+                // smallNode.textContent = event.name;
+                smallNode.appendChild(title);
+                smallNode.appendChild(course);
+                smallNode.appendChild(room);
             }
             function computeEventBlockWidth(event) {
                 var start = event.startDate;

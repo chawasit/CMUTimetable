@@ -1,177 +1,172 @@
+/* ==========================================================================
+ * Default settings
+ * ========================================================================== */
+/* ==========================================================================
+ * Mixins
+ * ========================================================================== */
+/* ==========================================================================
+ * Timetable
+ * ========================================================================== */
 .timetable {
-    box-sizing: border-box
+  font-size: 14px;
+  box-sizing: border-box;
 }
 .timetable::after {
-    clear: both;
-    content: "";
-    display: table
+  clear: both;
+  content: "";
+  display: table;
 }
-.timetable *,
-.timetable *:before,
-.timetable *:after {
-    box-sizing: inherit
+.timetable *, .timetable *:before, .timetable *:after {
+  box-sizing: inherit;
 }
-.timetable ul,
-.timetable li {
-    margin: 0;
-    padding: 0;
-    list-style-type: none
+.timetable ul, .timetable li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
-.timetable aside,
-.timetable section {
-    float: left
+.timetable aside, .timetable section {
+  float: left;
 }
 .timetable aside {
-    width: 10%;
-    padding: 0!important;
-    margin-top: 46px;
-    border-right: 5px solid transparent
+  width: 10%;
+  padding: 0 !important;
+  margin-top: 46px;
+  border-right: 5px solid transparent;
 }
 .timetable aside li {
-    padding: 0 15px;
-    background-color: #333333;
-    line-height: 46px
+  font-size: 1.5em;
+  padding: 0 15px;
+  background-color: #333;
+  line-height: 96px;
 }
 .timetable aside li:not(:last-of-type) {
-    border-bottom: 1px solid #fff
+  border-bottom: 1px solid white;
 }
 .timetable aside .row-heading {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
 }
 .timetable ul {
-    list-style-type: none;
-    margin: 0
+  list-style-type: none;
+  margin: 0;
 }
-.timetable aside li,
-.timetable time li {
-    height: 46px
+.timetable aside li, .timetable time li {
+  height: 96px;
 }
 .timetable section {
-    width: 90%;
-    padding: 0!important;
-/*    overflow-x: scroll;*/
-    -webkit-overflow-scrolling: touch
+  width: 90%;
+  padding: 0 !important;
+  -webkit-overflow-scrolling: touch;
 }
 .timetable section time {
-    white-space: nowrap;
-    display: inline-block
+  white-space: nowrap;
+  display: inline-block;
 }
 .timetable section header {
-    background-color: #333333;
-    height: 46px;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    font-size: 0
+  background-color: #333;
+  height: 46px;
+  transform-style: preserve-3d;
+  font-size: 0;
 }
 .timetable section header::after {
-    clear: both;
-    content: "";
-    display: table
+  clear: both;
+  content: "";
+  display: table;
 }
 .timetable section header li {
-    display: inline-block;
-    font-size: 1rem;
-    overflow: visible;
-    width: 0;
-    line-height: 46px;
-    display: inline-block;
-    position: relative
+  display: inline-block;
+  font-size: 1rem;
+  overflow: visible;
+  width: 0;
+  line-height: 46px;
+  display: inline-block;
+  position: relative;
 }
 .timetable section header li:not(:last-of-type) {
-    width: 96px
+  width: 96px;
 }
 .timetable section header li .time-label {
-    display: block;
-    position: absolute;
-    left: 0
+  display: block;
+  position: absolute;
+  left: 0;
 }
 .timetable section header li:not(:first-of-type) .time-label {
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%)
+  transform: translateX(-50%);
 }
 .timetable section header li:last-of-type .time-label {
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%)
+  transform: translateX(-100%);
 }
 @media only screen and (max-width: 960px) {
-    .timetable aside {
-        width: 20%
-    }
-    .timetable section {
-        width: 80%
-    }
+  .timetable aside {
+    width: 40%;
+  }
+  .timetable section {
+    width: 60%;
+  }
 }
 .timetable ul.room-timeline {
-    border-left: none;
-    position: relative;
-    overflow: hidden
+  border-left: none;
+  position: relative;
+  overflow: hidden;
 }
 .timetable ul.room-timeline li {
-    position: relative;
-    background-color: #F4F4F4
+  position: relative;
+  background-color: #F4F4F4;
 }
 .timetable ul.room-timeline li:nth-of-type(odd) {
-    background-color: #FDFDFD
+  background-color: #FDFDFD;
 }
 .timetable ul.room-timeline li:first-of-type {
-    border-top: 1px solid #E5E5E5
+  border-top: 1px solid #E5E5E5;
 }
 .timetable ul.room-timeline li:last-of-type {
-    border-bottom: 1px solid #E5E5E5
+  border-bottom: 1px solid #E5E5E5;
 }
 .timetable ul.room-timeline li:not(:last-of-type) {
-    border-bottom: none
+  border-bottom: none;
 }
 .timetable ul.room-timeline li:first-child .time-entry {
-    height: 44px
+  height: 94px;
 }
-.timetable ul.room-timeline li:after,
-.timetable ul.room-timeline li:before {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0
+.timetable ul.room-timeline li:after, .timetable ul.room-timeline li:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
-
 .timetable ul.room-timeline li:before {
-    background-image: linear-gradient(to right, #E5E5E5 1px, transparent 1px);
-    background-size: 24px auto
+  background-image: linear-gradient(to right, #E5E5E5 1px, transparent 1px);
+  background-size: 24px auto;
 }
 .timetable ul.room-timeline li:after {
-    background-image: linear-gradient(to right, #E5E5E5, #E5E5E5 1px, #F4F4F4 1px, #F4F4F4 2px, #E5E5E5 2px, #E5E5E5 3px, transparent 3px, transparent);
-    background-size: 96px auto;
-    background-position: -2px 0
+  background-image: linear-gradient(to right, #E5E5E5, #E5E5E5 1px, #F4F4F4 1px, #F4F4F4 2px, #E5E5E5 2px, #E5E5E5 3px, transparent 3px, transparent);
+  background-size: 96px auto;
+  background-position: -2px 0;
 }
 .timetable .time-entry {
-    background-color: #EC6A5E;
-    transition: 200ms background-color;
-    height: 45px;
-    display: block;
-    position: absolute;
-    z-index: 2;
-    padding: 0 10px;
-    white-space: normal;
-    overflow: hidden;
-    color: #fff;
-    border-left: 1px solid #fff;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d
+  background-color: #fff;
+  transition: 200ms background-color;
+  height: 95px;
+  display: block;
+  position: absolute;
+  z-index: 2;
+  padding: 0 10px;
+  white-space: normal;
+  overflow: hidden;
+  color: white;
+  border-left: 1px solid #d9d9d9;
+  transform-style: preserve-3d;
 }
 .timetable .time-entry small {
-    position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    display: block
+  display: block;
 }
 .timetable .time-entry:hover {
-    background-color: #e74030
+  background-color: #e6e6e6;
 }

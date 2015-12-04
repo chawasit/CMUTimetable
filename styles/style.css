@@ -1,29 +1,10 @@
-body {
-    background: #836DD9;
-    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    color: #fff;
 
-}
-a {
-    color: #fff;
-    text-decoration: none
-}
-.row-heading {
-    font-weight: 500;
-    font-size: .7em;
-    text-transform: uppercase
-}
-
-.timetable .time-label {
-    font-size: .9em;
-    font-weight: 500;
-}
 
 html, body {
   padding: 0;
   margin: 0;
   height: 100%;
-  font-size: 16px;
+  font-size: 18px;
   background: #836DD9;
   color: #fff;
   font-family: 'Source Sans Pro'; }
@@ -40,6 +21,23 @@ h2 {
   font-size: 1.15em;
   font-weight: 300;
   margin: 0.3rem 0; }
+
+a {
+    color: #fff;
+    text-decoration: none
+}
+
+
+.row-heading {
+    font-weight: 500;
+    font-size: .7em;
+    text-transform: uppercase
+}
+
+.timetable .time-label {
+    font-size: .9em;
+    font-weight: 500;
+}
 
 main {
   width: 95%;

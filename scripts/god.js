@@ -2,7 +2,7 @@
 * @Author: tturt
 * @Date:   2015-12-04 14:55:40
 * @Last Modified by:   tturt
-* @Last Modified time: 2015-12-04 18:02:52
+* @Last Modified time: 2015-12-04 21:41:48
 */
 
 var colorList = [
@@ -45,7 +45,7 @@ $( document ).ready(function() {
                     $('td', this).each(function () {
                         var d = $(this).html();
                         td.push(d);
-                        console.log(d);
+                        // console.log(d);
                     });
                     if(count>2)
                         ret.push(td);
@@ -59,7 +59,7 @@ $( document ).ready(function() {
                     $('td', this).each(function () {
                         var d = $(this).html();
                         td.push(d);
-                        console.log(d);
+                        // console.log(d);
                     });
                     td[2] += " (LAB)";
                     if(count>2)
@@ -70,9 +70,10 @@ $( document ).ready(function() {
             console.log(ret);
 
             ret.forEach(function (val, index, ar) {
-                var cno = val[1];
                 var title = val[2];
-
+                var course = val[1];
+                var lec = val[3];
+                var lab = val[4];
                 var time = val[8].split('<br><font color="#CC0000">');
                 var time1 = null;
                 var time2 = null;
@@ -96,12 +97,27 @@ $( document ).ready(function() {
                     day1 = day;
                 }
 
-                console.log("No."+cno+" "+title+" day "+day1+day2+" time "+time1+" time2 "+time2);
+                // console.log("No."+course+" "+title+" day "+day1+day2+" time "+time1+" time2 "+time2);
 
                 var color = colorList[colorCount++];
-                parseDay(day1, cno, title, time1, color);
+                var room = getRoom(sem, course, lec, lab );
+                var room1 = null;
+                var room2 = null;
+                if( typeof room === 'string' )
+                {
+                    room1 = room;
+                }else{
+                    try{
+                        room1 = room[0];
+                        room2 = room[1].split('<')[0];
+                    }
+                    catch (e){
+                        console.log(e);
+                    }
+                }
+                parseDay(day1, title, time1, course, lec, lab, room1, color);
                 if( day2 != null )
-                    parseDay(day2, cno, title+" (LAB)", time2, color);
+                    parseDay(day2, title+" (LAB)", time2, course, lec, lab, room2, color);
             });
 
             var renderer = new Timetable.Renderer(timetable);
@@ -117,43 +133,74 @@ $( document ).ready(function() {
                 console.log(e);
             }
         }
-        
-        function parseDay (day, no, title, time, color) {
+
+        function getRoom (sem, c, lec, lab) {
+            var room = null;
+            $.ajax({
+                url: "api.php",
+                data: {sem:sem, c:c, lec:lec, lab:lab},
+                type: 'get',
+                dataType: 'html',
+                async: false,
+                success: function(data) {
+                    var ret = null;
+                    $("tr[coursedata]", data).map(function (index, elem){
+                        var td = [];
+                        $('td', this).each(function () {
+                            var d = $(this).html();
+                            td.push(d);
+                            // console.log(d);
+                        });
+                        ret = td[9];
+                    });
+                    try
+                    {
+                        room = ret.split('<red>');
+                    }
+                    catch (e){
+                        room = ret;
+                    }
+                } 
+            });
+            return room;
+        }
+
+        function parseDay (day, title, time, course, lec, lab, room, color) {
             var starttime = time[0];
             var starthr = parseInt(starttime.slice(0,2));
             var startmi = parseInt(starttime.slice(2,4));
             var endtime = time[1];
             var endhr = parseInt(endtime.slice(0,2));
             var endmi = parseInt(endtime.slice(2,4));
-            console.log(starthr+""+startmi+""+endhr+""+endmi);
+            // console.log(starthr+""+startmi+""+endhr+""+endmi);
             switch(day)
             {
                 case 'Mo':
-                    timetable.addEvent(title, 'Monday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color);
+                    timetable.addEvent(title, 'Monday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color, course, lec, lab, room);
                     break;
                 case 'MTh':
-                    timetable.addEvent(title, 'Monday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color);
-                    timetable.addEvent(title, 'Thursday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color);
+                    timetable.addEvent(title, 'Monday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color, course, lec, lab, room);
+                    timetable.addEvent(title, 'Thursday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color, course, lec, lab, room);
                     break;
                 case 'Tu':
-                    timetable.addEvent(title, 'Tuesday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color);
+                    timetable.addEvent(title, 'Tuesday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color, course, lec, lab, room);
                     break;
                 case 'TuF':
-                    timetable.addEvent(title, 'Tuesday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color);
-                    timetable.addEvent(title, 'Friday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color);
+                    timetable.addEvent(title, 'Tuesday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color, course, lec, lab, room);
+                    timetable.addEvent(title, 'Friday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color, course, lec, lab, room);
                     break;
                 case 'We':
-                    timetable.addEvent(title, 'Wednesday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color);
+                    timetable.addEvent(title, 'Wednesday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color, course, lec, lab, room);
                     break;
                 case 'Th':
-                    timetable.addEvent(title, 'Thursday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color);
+                    timetable.addEvent(title, 'Thursday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color, course, lec, lab, room);
                     break;
                 case 'Fr':
-                    timetable.addEvent(title, 'Friday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color);
+                    timetable.addEvent(title, 'Friday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color, course, lec, lab, room);
                     break;
                 case 'Sa':
                     addDay('Saturday');
-                    timetable.addEvent(title, 'Saturday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color);
+                    timetable.addEvent(title, 'Saturday', new Date(2015,7,17,starthr,startmi), new Date(2015,7,17,endhr,endmi), '#', color, course, lec, lab, room);
                     break;
                 case 'Su':
                     addDay('Sunday');
