@@ -2,7 +2,7 @@
 * @Author: tturt
 * @Date:   2015-12-04 14:55:40
 * @Last Modified by:   tturt
-* @Last Modified time: 2015-12-04 21:41:48
+* @Last Modified time: 2015-12-04 21:56:42
 */
 
 var colorList = [
@@ -155,7 +155,7 @@ $( document ).ready(function() {
                     });
                     try
                     {
-                        room = ret.split('<red>');
+                        room = ret.split('<br><red>');
                     }
                     catch (e){
                         room = ret;
