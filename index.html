@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="CMU Timetable" />
+    <meta property="og:description" content="หาลิ๊งค์ตารางเรียนไม่เจอ? กดดูได้ที่นี่เลย " />
+    <meta property="og:image" content="https://www.zalzer.com/cmuregtimetable/img2.jpg" />
+    <meta property="og:url" content="https://www.zalzer.com/cmuregtimetable/" />
+    <meta name="description" content="ลิ๊งค์ตารางเรียนหาย? หาไม่เจอ? กดดูได้ที่นี่เลย ">
+    <meta name="keywords" content="CMU,Timetable,Reg">
+    <meta name="author" content="Chawasit Tengtrairatana">
+    <title>CMU Timetable</title>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="scripts/html2canvas.js"></script>
+    <script src="scripts/timetable.js"></script>
+    <script src="scripts/god.js"></script>
+    <link rel="stylesheet" href="styles/timetablejs.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8">
+    
+</head>
+<body>
+    <main>
+        <h1>CMU Timetable</h1>
+        <h2>By <a href="http://fb.me/TuR10S">Chawasit Tengtrairatana</a></h2>
+        <div id="box">
+            <label>Semester eg.258:</label>
+            <input type="text" id="sem" name="semester" style="width:25px;" maxlength="3"/>
+            <label>Student ID:</label>
+            <input type="text" id="sid" name="studentid" maxlength="9" style="width:100px;"/>
+            <button id="create" class="btn">GET</button>
+        </div>
+        <div id="loading" class="sk-cube-grid">
+            <div class="sk-cube sk-cube1"></div>
+            <div class="sk-cube sk-cube2"></div>
+            <div class="sk-cube sk-cube3"></div>
+            <div class="sk-cube sk-cube4"></div>
+            <div class="sk-cube sk-cube5"></div>
+            <div class="sk-cube sk-cube6"></div>
+            <div class="sk-cube sk-cube7"></div>
+            <div class="sk-cube sk-cube8"></div>
+            <div class="sk-cube sk-cube9"></div>
+        </div>
+    </main>
+    <div class="timetable" style="padding-left:50px;"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          document.querySelector('main').className += 'loaded';
+        });
+    </script>
+</body>
+</html>
