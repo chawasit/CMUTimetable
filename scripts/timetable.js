@@ -179,9 +179,10 @@ Timetable.Renderer = function(tt) {
             function appendEvent(event, node) {
                 var hasURL = event.url;
                 var elementType = hasURL ? 'a' : 'span';
+                var courseInfo = event.course+"("+event.lec+"-"+event.lab+")";
                 var aNode = node.appendChild(document.createElement(elementType));
                 var smallNode = aNode.appendChild(document.createElement('small'));
-                aNode.title = event.name;
+                aNode.title = event.name+", "+courseInfo+", "+event.room;
                 if (hasURL) {
                     aNode.href = event.url;
                 }
@@ -194,10 +195,9 @@ Timetable.Renderer = function(tt) {
                 var title = document.createElement('p');
                 title.textContent = event.name;
                 var course = document.createElement('p');
-                course.textContent = event.course+"("+event.lec+"-"+event.lab+")";
+                course.textContent = courseInfo;
                 var room = document.createElement('p');
                 room.textContent = event.room;
-                // smallNode.textContent = event.name;
                 smallNode.appendChild(title);
                 smallNode.appendChild(course);
                 smallNode.appendChild(room);
